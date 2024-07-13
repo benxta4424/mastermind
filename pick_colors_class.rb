@@ -4,5 +4,4 @@ class Pick
   def initialize(col)
     self.colors = col
   end
-  
 end

@@ -1,4 +1,4 @@
-class Guess
+class Guess < Pick
   attr_accessor :guess_array
 
   def initialize(guess_arr)
@@ -10,4 +10,9 @@ class Guess
       guess_array.push(gets.chomp.to_s)
     end
   end
+
+  def winner?(random_cols)
+    guess_array==random_cols
+  end
+  
 end
