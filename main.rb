@@ -4,6 +4,8 @@ require "./guess_colors_class"
 available_colors = %w[Red Blue Green Yellow Orange Purple]
 random_colors = []
 random_computer_colors = []
+guessed_positions=Array.new(4)
+correct_colors=Array.new(4)
 vector2 = []
 indexes=[]
 option = nil
@@ -89,14 +91,27 @@ while option != 1 && option != 2
     end
 
     while turn <= 12
-      4.times do
-          random_computer_colors.push(chooser.colors.sample)
-     end
+      4.times do |index|
+        if guessed_positions[index]
+          random_computer_colors[index]=guessed_positions[index] # Placeholder or skip the position
+        else
+          random_computer_colors[index]=available_colors.sample
+        end
+      end
 
      indexes=get_index(random_computer_colors,vector2)
      color_right_position=color_in_the_right_position(random_computer_colors,vector2)
      color_wrong_position=colors_wrong_position(random_computer_colors,vector2)
+      
+     indexes.each do |indx|
+      guessed_positions[indx]=random_computer_colors[indx]
+     end
 
+     if color_wrong_position==0 && color_right_position==0
+      random_computer_colors.each do |items|
+        available_colors.delete(items)
+      end
+     end
       puts "Computerul a ales urmatoarele culori:#{random_computer_colors}"
      
       if color_right_position==4 && turn <= 12
