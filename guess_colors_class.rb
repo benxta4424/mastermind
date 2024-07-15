@@ -12,7 +12,6 @@ class Guess < Pick
   end
 
   def winner?(random_cols)
-    guess_array==random_cols
+    guess_array == random_cols
   end
-  
 end
